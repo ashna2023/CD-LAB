@@ -1,9 +1,20 @@
 %{
-#include "y.tab.h"
+
+    #include "y.tab.h"
+
 %}
+
 %%
-[0-9] {return DIGIT;}
-[a-zA-Z] {return ALPHA;}
-\n {return 0;}
-. {return yytext[0];}
+
+[a-zA-Z_][a-zA-Z_0-9]* return id;
+[0-9] return digit;
+
 %%
+
+int yywrap()
+
+{
+
+return 1;
+
+}
