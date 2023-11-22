@@ -1,26 +1,45 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
+
+    #include<stdio.h>
+
+    int valid=1;   
+
 %}
-
-%token DIGIT ALPHA
-%%
-var : ALPHA
-    | var ALPHA
-    | var DIGIT
-    ;
+%token id digit
 
 %%
+start :id s;
+s:id s
+  |digit s
+  |
+  ;
+%%
+int yyerror()
 
-int main(int argc, char* argv[]) {
-    printf("Enter a variable: ");
-    yyparse();
-    printf("Valid\n");
+{
+
+    valid=0;
+
+    printf("\nInvalid identifier!\n");
+
     return 0;
+
 }
 
-int yyerror() {
-    printf("Invalid\n");
-    exit(1);
-}
+int main()
 
+{
+
+    printf("\nEnter the expression:\n");
+
+    yyparse();
+
+    if(valid)
+
+    {
+
+        printf("\nValid identifier!\n");
+
+    }
+
+}
